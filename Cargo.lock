@@ -1358,6 +1358,9 @@ dependencies = [
 [[package]]
 name = "shrubbery-client"
 version = "0.1.0"
+dependencies = [
+ "shrubbery-common",
+]
 
 [[package]]
 name = "shrubbery-common"

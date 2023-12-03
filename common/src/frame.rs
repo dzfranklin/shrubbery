@@ -1,7 +1,7 @@
 use crate::DocId;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Frame {
     /// Client sends negative monotonic integers, server sends positive
@@ -9,6 +9,7 @@ pub struct Frame {
     pub reply_to: Option<i32>,
     #[serde(flatten)]
     pub frame: FrameType,
+    pub bulk: Option<Vec<Frame>>,
 }
 
 impl Frame {
@@ -17,6 +18,7 @@ impl Frame {
             id,
             frame,
             reply_to: None,
+            bulk: None,
         }
     }
 
@@ -25,6 +27,7 @@ impl Frame {
             id,
             frame: inner,
             reply_to: Some(reply_to),
+            bulk: None,
         }
     }
 }
